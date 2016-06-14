@@ -6,8 +6,8 @@
  *      // keep a reference to our layerControl cuz we will need it to generate and apply shared states... see getStatefulParams()
  *      var LAYERS_AND_LEGENDS = [
  *          {
- *              'section': "Community Engagement",
- *              layers: [
+ *              'title': "Community Engagement",
+ *              layers: [.
  *                  {
  *                      'layer': 'Meeting_Locations',
  *                      'title': "Workshop locations",
@@ -109,17 +109,17 @@ L.Control.AccordionLegend = L.Control.extend({
             var sectitle = L.DomUtil.create('h2', 'accordionlegend-section-title', panel);
             var triangle = L.DomUtil.create('i', '+', sectitle);
             var title    = L.DomUtil.create('span', '', sectitle);
-            title.innerHTML = section.section;
+            title.innerHTML = section.title;
 
             var secdiv = L.DomUtil.create('div', 'accordionlegend-section accordionlegend-section-hidden', panel);
 
-            control.titlebarRegistry[section.section] = [ sectitle, secdiv, triangle ];
+            control.titlebarRegistry[section.title] = [ sectitle, secdiv, triangle ];
             L.DomEvent
                 .addListener(sectitle, 'mousedown', L.DomEvent.stopPropagation)
                 .addListener(sectitle, 'click', L.DomEvent.stopPropagation)
                 .addListener(sectitle, 'click', L.DomEvent.preventDefault)
                 .addListener(sectitle, 'click', function () {
-                    control.toggleSection(section.section);
+                    control.toggleSection(section.title);
                 });
 
             L.DomEvent
