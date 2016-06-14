@@ -1,0 +1,107 @@
+.leaflet-control-accordionlegend-panel,.leaflet-control-accordionlegend-button {
+    color: #444 !important;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.65);
+    border-radius:3px;
+    font-weight: bold;
+    background-color:white;
+    border-radius:3px;
+}
+
+.leaflet-control-accordionlegend-button {
+    cursor:pointer;
+    padding: 0.25em .75em 0.25em .75em;
+    font-size:13px;
+    line-height: 2.3;
+}
+
+.leaflet-control-accordionlegend-panel-hidden,
+.leaflet-control-accordionlegend-panel div.accordionlegend-section-hidden,
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend-hidden
+{
+    display:none !important;
+}
+
+.leaflet-control-accordionlegend-panel {
+    padding: 0.25em .75em 0.25em .75em;
+    font-size:13px;
+
+    max-height:75%; /* actual maxHeight is set in resize handler code */
+    overflow:auto;
+}
+
+.leaflet-control-accordionlegend-panel label {
+    cursor:pointer;
+}
+
+.leaflet-control-accordionlegend-panel h2 {
+    font-weight:bold;
+    font-size:15px;
+ 
+    white-space:nowrap;
+
+    cursor:pointer;
+ 
+    padding:0 1em 0 0;
+    margin:0;
+}
+
+.leaflet-control-accordionlegend-panel h2 i {
+    margin-right:0.5em;
+}
+
+.leaflet-control-accordionlegend-panel div.accordionlegend-section {
+    margin-left:2em;
+    font-weight:normal;
+}
+
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer {
+}
+
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer label {
+    white-space:nowrap;
+}
+
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend {
+    margin-left:1.5em;
+    font-weight:normal;
+    margin-bottom:1em;
+}
+
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend div.accordionlegend-slider {
+    margin-bottom:0.75em;
+}
+
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend div.accordionlegend-swatch {
+    display:inline-block;
+    width:1em;
+    height:1em;
+}
+
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend div.accordionlegend-swatch.accordionlegend-swatch-circle {
+    border-radius:50%;
+}
+
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend div.accordionlegend-swatch-text {
+    display: inline-block;
+    margin-left: 0.5em;
+}
+
+
+.leaflet-control-accordionlegend-panel .noUi-horizontal {
+    height: 8px;
+}
+
+.leaflet-control-accordionlegend-panel .noUi-horizontal .noUi-handle {
+    width: 16px;
+    height: 16px;
+    left: -8px;
+    top: -6px;
+}
+
+.leaflet-control-accordionlegend-panel .noUi-handle {
+    border-radius: 50%;
+}
+
+.leaflet-control-accordionlegend-panel .noUi-handle:after, .leaflet-control-accordionlegend-panel .noUi-handle:before {
+    width: 0;
+}
