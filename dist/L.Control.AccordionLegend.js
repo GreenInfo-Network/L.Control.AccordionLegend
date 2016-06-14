@@ -1,57 +1,11 @@
 /*
- * Github project: https://github.com/GreenInfo-Network/L.Control.AccordionLegend
- *
- * Usage:
- *      // feed it a set of sections and layer-legend items
- *      // keep a reference to our layerControl cuz we will need it to generate and apply shared states... see getStatefulParams()
- *      var LAYERS_AND_LEGENDS = [
- *          {
- *              'title': "Community Engagement",
- *              layers: [.
- *                  {
- *                      'layer': 'Meeting_Locations',
- *                      'title': "Workshop locations",
- *                      'type': 'point',
- *                      'legend': [
- *                          { 'color':'rgb(235,200,55)', 'text':"Workshop location" },
- *                      ],
- *                  },
- *                  {
- *                      'layer': 'LanguageTranslation_Recommendation',
- *                      'title': "Tool kit languages, recommended",
- *                      'type': 'polygon',
- *                      'legend': [
- *                          { 'color':'rgb(204,204,204)', 'text':"English Only" },
- *                          { 'color':'rgb(115,90,242)', 'text':"Armenian" },
- *                          { 'color':'rgb(230,102,25)', 'text':"Chinese" },
- *                          { 'color':'rgb(84,217,217)', 'text':"Spanish" },
- *                          { 'color':'rgb(230,51,128)', 'text':"Spanish and Korean" },
- *                      ],
- *                  },
- *                  {
- *                      'layer': 'LanguageTranslation_Actual',
- *                      'title': "Tool kit languages, actual",
- *                      'type': 'polygon',
- *                      'legend': [
- *                          { 'color':'rgb(204,204,204)', 'text':"English Only" },
- *                          { 'color':'rgb(230,102,25)', 'text':"Chinese Only" },
- *                          { 'color':'rgb(84,217,217)', 'text':"Spanish Only" },
- *                          { 'color':'rgb(115,89,191)', 'text':"Spanish and Chinese" },
- *                          { 'color':'rgb(230,51,128)', 'text':"Spanish and Korean" },
- *                      ],
- *                  },
- *              ]
- *          },
- *      ];
- *      var layerControl = new L.Control.AccordionLegend({
- *          position: 'topleft',
- *          content: LAYERS_AND_LEGENDS,
- *      }).addTo(this.map).expandUI('Community Engagement').toggleLayer('LanguageTranslation_Actual',true);
+ * https://github.com/GreenInfo-Network/L.Control.AccordionLegend
  */
 
 L.Control.AccordionLegend = L.Control.extend({
     options: {
-        position: 'topleft'
+        position: 'topleft',
+        title: 'Map Layers'
     },
     initialize: function(options) {
         if (! options.content || ! Array.isArray(options.content) ) throw "L.Control.AccordionLegend: missing content list";
@@ -85,7 +39,7 @@ L.Control.AccordionLegend = L.Control.extend({
         // first, the button
         var button          = L.DomUtil.create('div', 'leaflet-control-accordionlegend-button', maindiv);
         button.control      = this;
-        button.innerHTML    = 'Map Layers';
+        button.innerHTML    = this.options.title;
         L.DomEvent
             .addListener(button, 'mousedown', L.DomEvent.stopPropagation)
             .addListener(button, 'click', L.DomEvent.stopPropagation)
