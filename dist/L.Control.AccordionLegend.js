@@ -122,14 +122,28 @@ L.Control.AccordionLegend = L.Control.extend({
                 });
 
                 layer.legend.forEach(function (classification) {
-                    var swatchline = L.DomUtil.create('div', '', legend);
+                    var swatchline = L.DomUtil.create('div', 'accordionlegend-classification', legend);
 
-                    var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
-                    swatch.style.backgroundColor = classification.color;
+                    switch (classification.type) {
+                        case 'circle':
+                            var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
+                            swatch.style.backgroundColor = classification.color;
+                            L.DomUtil.addClass(swatch, 'accordionlegend-swatch-circle');
+                            break;
+                        case 'square':
+                            var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
+                            swatch.style.backgroundColor = classification.color;
+                            break;
+                        case 'image':
+                            var swatch = L.DomUtil.create('img', 'accordionlegend-swatch', swatchline);
+                            swatch.src = classification.url;
+                            break;
+                        default:
+                            console.error("L.Control.AccordionLegend unknown legend type: " + classification.type);
+                    }
+
                     var text   = L.DomUtil.create('div', 'accordionlegend-swatch-text', swatchline);
                     text.innerHTML = classification.text;
-
-                    if (layer.type == 'point') L.DomUtil.addClass(swatch, 'accordionlegend-swatch-circle');
                 });
             });
             sections.push(secdiv);

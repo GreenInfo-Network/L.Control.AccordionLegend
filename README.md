@@ -23,9 +23,10 @@ The *content* parameter is a structure for the legend. This consists of a list o
                 {
                     'title': "Stamen Watercolor",
                     'layer': L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', { zIndex:1000, opacity:0.6 }),
-                    'type': 'point', // point=circle icons in legend; anything_else=square icons in legend
                     'legend': [
-                        { 'color':'#FF9933', 'text':"Legend Title and Color" },
+                            { 'type':'square', 'color':'#FF9933', 'text':"Square Legend Swatch" },
+                            { 'type':'circle', 'color':'#99FF33', 'text':"Circular Legend Swatch" },
+                            { 'type':'image', 'url':'https://cdn4.iconfinder.com/data/icons/6x16-free-application-icons/16/Boss.png', 'text':"Icon Swatch" },
                     ],
                 },
                 // add more layer objects to this section
@@ -37,9 +38,8 @@ The *content* parameter is a structure for the legend. This consists of a list o
                 {
                     'title': "Stamen Toner",
                     'layer': L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', { zIndex:1000, opacity:0.6 }),
-                    'type': 'polygon', // point=circle icons in legend; anything_else=square icons in legend
                     'legend': [
-                        { 'color':'#000000', 'text':"Legend Title and Color" },
+                            { 'type':'circle', 'color':'rgb(255,255,0)', 'text':"Yellow Circular Swatch" },
                     ],
                 },
                 // add more layer objects to this section
@@ -61,12 +61,14 @@ A more formal description is as follows:
 * Each Layer object is structured as follows:
     * A *title* attribute, which is the title displayed in the legend. This is used as an internal reference and therefore *must be unique* among other Layers.
     * A *layer* attribute, which is the L.TileLayer instance to be managed by this legend entry.
-    * A *type* attribute, which affects the legend swatches generated.
-        * If this is "point", then a circular legend swatch is used.
-        * If this is any other value, then a rectangular legend swatch is used.
-    * A *legend* attribute, this being the *Legend* object to be displayed for this layer.
-* A Legend is a list object, containing legend entry objects as follows:
-    * A *color* attribute, this being the color of the swatch for this classification.
+    * A *legend* attribute, this being the list of *Legend* objects to be displayed for this layer.
+* The list of Legend objects, are as follows:
+    * A *type* attribute, which affects the legend swatch generated.
+        * *square* -- The legend swatch will be a square 1em X 1em.
+        * *circle* -- The legend swatch will be a circle 1em X 1em.
+        * *image* -- The legend swatch will be an image. The image will be sized to 1em X 1em, so should be about that size (15px or so) in order to look good.
+    * A *color* attribute, this being the color of the swatch for this classification. This is only effective for *square* and *circle* types.
+    * A *url* attribute, this being the URL of the image. This is only effective for *image* types.
     * A *text* attribute, this being the text to display for this classification.
     * The Legend may be an empty list, in order to generate no visible legend.
 
