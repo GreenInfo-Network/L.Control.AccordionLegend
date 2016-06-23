@@ -21,6 +21,7 @@ L.Control.AccordionLegend = L.Control.extend({
         control.layerRegistry    = {};
         control.checkboxRegistry = {};
         control.titlebarRegistry = {};
+        control.legendRegistry   = {};
 
         // first and foremost
         // we need to in fact create the L.TileLayer.WMS instances!
@@ -95,6 +96,7 @@ L.Control.AccordionLegend = L.Control.extend({
                 control.checkboxRegistry[layer.title] = cbox; // the checkbox registry for toggleLayer()
 
                 var legend = L.DomUtil.create('div', 'accordionlegend-legend accordionlegend-legend-hidden', layerdiv);
+                control.legendRegistry[layer.layer] = legend;
 
                 var startingOpacity = layer.type == 'point' ? 100 : 66;
                 var slider = L.DomUtil.create('input', 'accordionlegend-slider', legend);
@@ -111,14 +113,7 @@ L.Control.AccordionLegend = L.Control.extend({
                 L.DomEvent.addListener(cbox, 'change', function () {
                     var layername = this.value;
                     var onoff     = this.checked;
-                    if (onoff) {
-                        L.DomUtil.removeClass(legend, 'accordionlegend-legend-hidden');
-                        control.toggleLayer(layername,true);
-                    }
-                    else {
-                        L.DomUtil.addClass(legend, 'accordionlegend-legend-hidden');
-                        control.toggleLayer(layername,false);
-                    }
+                    control.toggleLayer(layername,onoff);
                 });
 
                 layer.legend.forEach(function (classification) {
@@ -172,14 +167,18 @@ L.Control.AccordionLegend = L.Control.extend({
     toggleLayer: function (layername,onoff) {
         var map   = this.map;
         var layer = this.layerRegistry[layername];
+        var legend = this.legendRegistry[layername];
         var cbox  = this.checkboxRegistry[layername];
+
         if (onoff) {
             cbox.checked = true;
             map.addLayer(layer);
+            L.DomUtil.removeClass(legend, 'accordionlegend-legend-hidden');
         }
         else {
             cbox.checked = false;
             map.removeLayer(layer);
+            L.DomUtil.addClass(legend, 'accordionlegend-legend-hidden');
         }
 
         // return myself cuz method chaining is awesome
