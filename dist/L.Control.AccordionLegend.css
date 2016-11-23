@@ -77,8 +77,13 @@
     height:1em;
 }
 
-.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend div.accordionlegend-swatch.accordionlegend-swatch-circle {
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend div.accordionlegend-classification div.accordionlegend-swatch.accordionlegend-swatch-circle {
     border-radius:50%;
+}
+
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend div.accordionlegend-classification div.accordionlegend-swatch.accordionlegend-swatch-line {
+    height: 0.2em;
+    margin-top: 0.4em;    
 }
 
 .leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend div.accordionlegend-swatch-text {
