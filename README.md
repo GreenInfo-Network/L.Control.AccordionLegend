@@ -18,34 +18,26 @@ The *content* parameter is a structure for the legend. This consists of a list o
 ```
     var LAYERS_AND_LEGENDS = [
         {
-            'title': "Examples 1",
+            'title': "Base Maps",
             layers: [
                 {
-                    'title': "Stamen Watercolor",
-                    'layer': L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', { zIndex:1000, opacity:0.6 }),
+                    'title': "OSM Basemap",
+                    'layer': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}),
                     'legend': [
-                            { 'type':'square', 'color':'#FF9933', 'text':"Square Legend Swatch" },
-                            { 'type':'circle', 'color':'#99FF33', 'text':"Circular Legend Swatch" },
-                            { 'type':'image', 'url':'https://cdn4.iconfinder.com/data/icons/6x16-free-application-icons/16/Boss.png', 'text':"Icon Swatch" },
-                    ],
-                },
-                // add more layer objects to this section
-            ]
-        },
-        {
-            'title': "Examples 2",
-            layers: [
-                {
-                    'title': "Stamen Toner",
-                    'layer': L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', { zIndex:1000, opacity:0.6 }),
-                    'legend': [
-                            { 'type':'circle', 'color':'rgb(255,255,0)', 'text':"Yellow Circular Swatch" },
+                        { 'type':'line', 'color':'#e99dae', 'text':"Interstate Highway" },
+                        { 'type':'line', 'color':'#f2baa8', 'text':"State Highway" },
+                        { 'type':'line', 'color':'#e1c6db', 'text':"State Boundary" },
+                        { 'type':'square', 'color':'#bdd3d3', 'text':"Water" },
                     ],
                 },
                 // add more layer objects to this section
             ]
         },
         // add more sections, with a 'section' title and a list of layers:[]
+        {
+            'title': "Second Section",
+            layers: [ ... add layers to this accordion section ... ]
+        },
     ];
 
     new L.Control.AccordionLegend({
@@ -64,10 +56,11 @@ A more formal description is as follows:
     * A *legend* attribute, this being the list of *Legend* objects to be displayed for this layer.
 * The list of Legend objects, are as follows:
     * A *type* attribute, which affects the legend swatch generated.
-        * *square* -- The legend swatch will be a square 1em X 1em.
-        * *circle* -- The legend swatch will be a circle 1em X 1em.
+        * *square* -- The legend swatch will be a square.
+        * *circle* -- The legend swatch will be a circle.
+        * *line* -- The legend swatch will be a line.
         * *image* -- The legend swatch will be an image. The image will be sized to 1em X 1em, so should be about that size (15px or so) in order to look good.
-    * A *color* attribute, this being the color of the swatch for this classification. This is only effective for *square* and *circle* types.
+    * A *color* attribute, this being the color of the swatch for this classification. This is only effective for *square*, *line*, and *circle* types.
     * A *url* attribute, this being the URL of the image. This is only effective for *image* types.
     * A *text* attribute, this being the text to display for this classification.
     * The Legend may be an empty list, in order to generate no visible legend.
