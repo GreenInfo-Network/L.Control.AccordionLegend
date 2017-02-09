@@ -164,16 +164,18 @@ L.Control.AccordionLegend = L.Control.extend({
         handleResize();
 
         // collapse the UI
+        // and trigger a section now so as to update the + and - signs on the sections
         this.collapseUI();
+        this.expandSection(sections[0].title);
 
         // and we're done!
         return maindiv;
     },
     toggleLayer: function (layername,onoff) {
-        var map   = this.map;
-        var layer = this.layerRegistry[layername];
+        var map    = this.map;
+        var layer  = this.layerRegistry[layername];
         var legend = this.legendRegistry[layername];
-        var cbox  = this.checkboxRegistry[layername];
+        var cbox   = this.checkboxRegistry[layername];
 
         if (onoff) {
             cbox.checked = true;
@@ -210,6 +212,8 @@ L.Control.AccordionLegend = L.Control.extend({
     toggleUI: function () {
         var viz = L.DomUtil.hasClass(this.panel, 'leaflet-control-accordionlegend-panel-hidden');
         viz ? this.expandUI() : this.collapseUI();
+
+        // return myself cuz method chaining is awesome
         return this;
     },
     expandSection: function (sectionname) {
@@ -230,6 +234,9 @@ L.Control.AccordionLegend = L.Control.extend({
                 triangle.innerHTML = '+';
             }
         });
+
+        // return myself cuz method chaining is awesome
+        return this;
     },
     collapseSection: function (sectionname) {
         var control = this;
@@ -244,6 +251,9 @@ L.Control.AccordionLegend = L.Control.extend({
             L.DomUtil.addClass(secdiv, 'accordionlegend-section-hidden');
             triangle.innerHTML = '+';
         });
+
+        // return myself cuz method chaining is awesome
+        return this;
     },
     toggleSection: function (sectionname) {
         var control = this;
@@ -261,6 +271,9 @@ L.Control.AccordionLegend = L.Control.extend({
                 control.collapseSection(sectionname);
             }
         });
+
+        // return myself cuz method chaining is awesome
+        return this;
     },
     collapseUI: function () {
         // add the CSS which hides the legend panel
