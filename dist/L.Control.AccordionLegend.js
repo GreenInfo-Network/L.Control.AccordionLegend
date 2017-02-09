@@ -106,6 +106,11 @@ L.Control.AccordionLegend = L.Control.extend({
                             var swatch = L.DomUtil.create('div', 'accordionlegend-swatch accordionlegend-swatch-inline', clbl);
                             swatch.style.backgroundColor = classification.color;
                             break;
+                        case 'line':
+                            var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', clbl);
+                            swatch.style.backgroundColor = classification.color;
+                            L.DomUtil.addClass(swatch, 'accordionlegend-swatch-line');
+                            break;
                         case 'image':
                             var swatch = L.DomUtil.create('img', 'accordionlegend-swatch accordionlegend-swatch-inline', clbl);
                             swatch.src = classification.url;
