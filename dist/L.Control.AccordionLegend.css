@@ -88,6 +88,14 @@
     vertical-align:text-top;
 }
 
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer label > div.accordionlegend-swatch {
+    margin-left:0.5em;
+}
+
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer label > img.accordionlegend-swatch {
+    margin-left:0.5em;
+}
+
 .leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-swatch.accordionlegend-swatch-circle {
     border-radius:50%;
 }
