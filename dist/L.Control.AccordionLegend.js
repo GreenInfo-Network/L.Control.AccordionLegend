@@ -90,6 +90,32 @@ L.Control.AccordionLegend = L.Control.extend({
                 var cbox = L.DomUtil.create('input', '', clbl);
                 cbox.type  = 'checkbox';
                 cbox.value = layer.title;
+
+                // the text label (the layer title) for the checkbox
+                // if we have only 1 legend entry with no 'text', this includes an inline legend
+                // otherwise, it's just the layer title and the legend happens below inside the toggle-able legend DIV
+                if (layer.legend.length == 1 && ! layer.legend[0].text) {
+                    var classification = layer.legend[0];
+                    switch (classification.type) {
+                        case 'circle':
+                            var swatch = L.DomUtil.create('div', 'accordionlegend-swatch accordionlegend-swatch-inline', clbl);
+                            swatch.style.backgroundColor = classification.color;
+                            L.DomUtil.addClass(swatch, 'accordionlegend-swatch-circle');
+                            break;
+                        case 'square':
+                            var swatch = L.DomUtil.create('div', 'accordionlegend-swatch accordionlegend-swatch-inline', clbl);
+                            swatch.style.backgroundColor = classification.color;
+                            break;
+                        case 'image':
+                            var swatch = L.DomUtil.create('img', 'accordionlegend-swatch accordionlegend-swatch-inline', clbl);
+                            swatch.src = classification.url;
+                            break;
+                        default:
+                            console.error("L.Control.AccordionLegend unknown legend type: " + classification.type);
+                    }
+                }
+
+                // the checkbox's label as usual, whether there was an inline legend or not
                 var ctxt = L.DomUtil.create('span', '', clbl);
                 ctxt.innerHTML = ' ' + layer.title;
 
@@ -116,35 +142,39 @@ L.Control.AccordionLegend = L.Control.extend({
                     control.toggleLayer(layername,onoff);
                 });
 
-                layer.legend.forEach(function (classification) {
-                    var swatchline = L.DomUtil.create('div', 'accordionlegend-classification', legend);
+                // now construct the legend
+                // if there's only 1 legend entry and it has no 'text' then use an inline legend instead
+                if (layer.legend.length > 1 || (layer.legend.length == 1 && layer.legend[0].text)) {
+                    layer.legend.forEach(function (classification) {
+                        var swatchline = L.DomUtil.create('div', 'accordionlegend-classification', legend);
 
-                    switch (classification.type) {
-                        case 'circle':
-                            var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
-                            swatch.style.backgroundColor = classification.color;
-                            L.DomUtil.addClass(swatch, 'accordionlegend-swatch-circle');
-                            break;
-                        case 'square':
-                            var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
-                            swatch.style.backgroundColor = classification.color;
-                            break;
-                        case 'line':
-                            var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
-                            swatch.style.backgroundColor = classification.color;
-                            L.DomUtil.addClass(swatch, 'accordionlegend-swatch-line');
-                            break;
-                        case 'image':
-                            var swatch = L.DomUtil.create('img', 'accordionlegend-swatch', swatchline);
-                            swatch.src = classification.url;
-                            break;
-                        default:
-                            console.error("L.Control.AccordionLegend unknown legend type: " + classification.type);
-                    }
+                        switch (classification.type) {
+                            case 'circle':
+                                var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
+                                swatch.style.backgroundColor = classification.color;
+                                L.DomUtil.addClass(swatch, 'accordionlegend-swatch-circle');
+                                break;
+                            case 'square':
+                                var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
+                                swatch.style.backgroundColor = classification.color;
+                                break;
+                            case 'line':
+                                var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
+                                swatch.style.backgroundColor = classification.color;
+                                L.DomUtil.addClass(swatch, 'accordionlegend-swatch-line');
+                                break;
+                            case 'image':
+                                var swatch = L.DomUtil.create('img', 'accordionlegend-swatch', swatchline);
+                                swatch.src = classification.url;
+                                break;
+                            default:
+                                console.error("L.Control.AccordionLegend unknown legend type: " + classification.type);
+                        }
 
-                    var text   = L.DomUtil.create('div', 'accordionlegend-swatch-text', swatchline);
-                    text.innerHTML = classification.text;
-                });
+                        var text   = L.DomUtil.create('div', 'accordionlegend-swatch-text', swatchline);
+                        text.innerHTML = classification.text;
+                    });
+                }
             });
             sections.push(secdiv);
         });

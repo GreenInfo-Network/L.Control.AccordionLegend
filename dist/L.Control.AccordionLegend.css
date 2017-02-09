@@ -71,22 +71,33 @@
     margin-bottom:0.75em;
 }
 
-.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend div.accordionlegend-swatch {
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend div.accordionlegend-classification {
+}
+
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-swatch {
     display:inline-block;
     width:1em;
     height:1em;
+    vertical-align:text-top;
 }
 
-.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend div.accordionlegend-classification div.accordionlegend-swatch.accordionlegend-swatch-circle {
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer img.accordionlegend-swatch {
+    display:inline;
+    width:1em;
+    height:1em;
+    vertical-align:text-top;
+}
+
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-swatch.accordionlegend-swatch-circle {
     border-radius:50%;
 }
 
-.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend div.accordionlegend-classification div.accordionlegend-swatch.accordionlegend-swatch-line {
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-swatch.accordionlegend-swatch-line {
     height: 0.25em;
     margin-top: 0.5em;
 }
 
-.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend div.accordionlegend-swatch-text {
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-swatch-text {
     display: inline-block;
     margin-left: 0.5em;
 }

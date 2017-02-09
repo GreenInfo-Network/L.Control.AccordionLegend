@@ -67,6 +67,29 @@ A more formal description is as follows:
 
 
 
+# Inline Legends (Single Swatch Next to Checkbox)
+
+If a *Layer* has only one *Legend* entry, and this entry has an empty *text* attribute, then the legend will be treated differently.
+
+Instead of creating a collapsing legend section underneath the opacity slider, containing one swatch and no text, it will create a smaller "inline" legend, a single swatch between the checkbox and the layer title.
+
+Example:
+```
+    // one legend classification with no text
+    // the red circle will appear next to the checkbox for a more compact layout
+    {
+        'title': "Sample Stations",
+        'layer': L.tileLayer('https://{s}.somedomain.org/{z}/{x}/{y}.png', {}),
+        'legend': [
+            { 'type':'circle', 'color':'#FF0000', 'text':"" },
+        ],
+    },
+```
+
+If you really do want your single unlabeled swatch to appear in a section beneath the opacity slider, simply make the *text* attribute not blank, e.g. one single space.
+
+
+
 # Other Methods and Tricks
 
 **toggleLayer(layertitle,onoff)**
