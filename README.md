@@ -10,6 +10,23 @@ https://github.com/GreenInfo-Network/L.Control.AccordionLegend
 http://greeninfo-network.github.io/L.Control.AccordionLegend
 
 
+# Installation
+
+Download the release and unpack it, or install it via package manager:
+* `npm i leaflet-control-accordionlegend`
+
+Include the CSS and JS files using tags as usual:
+```
+<script type="text/javascript" src="leaflet-control-accordionlegend/dist/L.Control.AccordionLegend.js"></script>
+<link rel="stylesheet" type="text/css" href="leaflet-control-accordionlegend/dist/L.Control.AccordionLegend.css" />
+```
+
+Or `require` them:
+```
+require('leaflet-control-accordionlegend/dist/L.Control.AccordionLegend.js');
+require('leaflet-control-accordionlegend/dist/L.Control.AccordionLegend.css');
+```
+
 
 # Basic Usage
 
