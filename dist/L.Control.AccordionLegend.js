@@ -228,6 +228,14 @@ L.Control.AccordionLegend = L.Control.extend({
         // return myself cuz method chaining is awesome
         return this;
     },
+    getLayer: function (layername) {
+        var layer = this.layerRegistry[layername];
+        return layer;
+    },
+    getLayerState: function (layername) {
+        var layer = this.layerRegistry[layername];
+        return this.map.hasLayer(layer);
+    },
     listLayersStates: function () {
         var layerStates = {};
         var map = this.map;
