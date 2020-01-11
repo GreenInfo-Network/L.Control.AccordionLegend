@@ -36,18 +36,16 @@ L.Control.AccordionLegend = L.Control.extend({
 
         // create our main container; the real action is inside the button and the panel, but they share this parent container
         var maindiv = L.DomUtil.create('div', 'leaflet-control-accordionlegend');
+        L.DomEvent.disableClickPropagation(maindiv);
+        L.DomEvent.disableScrollPropagation(maindiv);
 
         // first, the button
         var button          = L.DomUtil.create('div', 'leaflet-control-accordionlegend-button', maindiv);
         button.control      = this;
         button.innerHTML    = this.options.title;
-        L.DomEvent
-            .addListener(button, 'mousedown', L.DomEvent.stopPropagation)
-            .addListener(button, 'click', L.DomEvent.stopPropagation)
-            .addListener(button, 'click', L.DomEvent.preventDefault)
-            .addListener(button, 'click', function () {
-                this.control.toggleUI();
-            });
+        L.DomEvent.addListener(button, 'click', function () {
+            this.control.toggleUI();
+        });
 
         // the panel
         // iterate over the accordion sections...
@@ -69,17 +67,9 @@ L.Control.AccordionLegend = L.Control.extend({
             var secdiv = L.DomUtil.create('div', 'accordionlegend-section accordionlegend-section-hidden', panel);
 
             control.titlebarRegistry[section.title] = [ sectitle, secdiv, triangle ];
-            L.DomEvent
-                .addListener(sectitle, 'mousedown', L.DomEvent.stopPropagation)
-                .addListener(sectitle, 'click', L.DomEvent.stopPropagation)
-                .addListener(sectitle, 'click', L.DomEvent.preventDefault)
-                .addListener(sectitle, 'click', function () {
-                    control.toggleSection(section.title);
-                });
-
-            L.DomEvent
-                .addListener(secdiv, 'mousedown', L.DomEvent.stopPropagation)
-                .addListener(secdiv, 'click', L.DomEvent.stopPropagation);
+            L.DomEvent.addListener(sectitle, 'click', function () {
+                control.toggleSection(section.title);
+            });
 
             // part 2
             // the 'secdiv' content of the layer-legends and layer-checkboxes
@@ -94,26 +84,25 @@ L.Control.AccordionLegend = L.Control.extend({
                 // the text label (the layer title) for the checkbox
                 // if we have only 1 legend entry with no 'text', this includes an inline legend
                 // otherwise, it's just the layer title and the legend happens below inside the toggle-able legend DIV
-                var swatch;
                 if (layer.legend.length == 1 && ! layer.legend[0].text) {
                     var classification = layer.legend[0];
                     switch (classification.type) {
                         case 'circle':
-                            swatch = L.DomUtil.create('div', 'accordionlegend-swatch accordionlegend-swatch-inline', clbl);
+                            var swatch = L.DomUtil.create('div', 'accordionlegend-swatch accordionlegend-swatch-inline', clbl);
                             swatch.style.backgroundColor = classification.color;
                             L.DomUtil.addClass(swatch, 'accordionlegend-swatch-circle');
                             break;
                         case 'square':
-                            swatch = L.DomUtil.create('div', 'accordionlegend-swatch accordionlegend-swatch-inline', clbl);
+                            var swatch = L.DomUtil.create('div', 'accordionlegend-swatch accordionlegend-swatch-inline', clbl);
                             swatch.style.backgroundColor = classification.color;
                             break;
                         case 'line':
-                            swatch = L.DomUtil.create('div', 'accordionlegend-swatch', clbl);
+                            var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', clbl);
                             swatch.style.backgroundColor = classification.color;
                             L.DomUtil.addClass(swatch, 'accordionlegend-swatch-line');
                             break;
                         case 'image':
-                            swatch = L.DomUtil.create('img', 'accordionlegend-swatch accordionlegend-swatch-inline', clbl);
+                            var swatch = L.DomUtil.create('img', 'accordionlegend-swatch accordionlegend-swatch-inline', clbl);
                             swatch.src = classification.url;
                             break;
                         default:
@@ -152,26 +141,25 @@ L.Control.AccordionLegend = L.Control.extend({
                 // if there's only 1 legend entry and it has no 'text' then use an inline legend instead
                 if (layer.legend.length > 1 || (layer.legend.length == 1 && layer.legend[0].text)) {
                     layer.legend.forEach(function (classification) {
-                        var swatch;
                         var swatchline = L.DomUtil.create('div', 'accordionlegend-classification', legend);
 
                         switch (classification.type) {
                             case 'circle':
-                                swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
+                                var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
                                 swatch.style.backgroundColor = classification.color;
                                 L.DomUtil.addClass(swatch, 'accordionlegend-swatch-circle');
                                 break;
                             case 'square':
-                                swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
+                                var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
                                 swatch.style.backgroundColor = classification.color;
                                 break;
                             case 'line':
-                                swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
+                                var swatch = L.DomUtil.create('div', 'accordionlegend-swatch', swatchline);
                                 swatch.style.backgroundColor = classification.color;
                                 L.DomUtil.addClass(swatch, 'accordionlegend-swatch-line');
                                 break;
                             case 'image':
-                                swatch = L.DomUtil.create('img', 'accordionlegend-swatch', swatchline);
+                                var swatch = L.DomUtil.create('img', 'accordionlegend-swatch', swatchline);
                                 swatch.src = classification.url;
                                 break;
                             default:
@@ -228,14 +216,6 @@ L.Control.AccordionLegend = L.Control.extend({
         // return myself cuz method chaining is awesome
         return this;
     },
-    getLayer: function (layername) {
-        var layer = this.layerRegistry[layername];
-        return layer;
-    },
-    getLayerState: function (layername) {
-        var layer = this.layerRegistry[layername];
-        return this.map.hasLayer(layer);
-    },
     listLayersStates: function () {
         var layerStates = {};
         var map = this.map;
@@ -256,12 +236,7 @@ L.Control.AccordionLegend = L.Control.extend({
     },
     toggleUI: function () {
         var viz = L.DomUtil.hasClass(this.panel, 'leaflet-control-accordionlegend-panel-hidden');
-        if (viz) {
-            this.expandUI();
-        }
-        else {
-            this.collapseUI();
-        }
+        viz ? this.expandUI() : this.collapseUI();
 
         // return myself cuz method chaining is awesome
         return this;
