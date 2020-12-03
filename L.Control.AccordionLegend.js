@@ -121,22 +121,25 @@ L.Control.AccordionLegend = L.Control.extend({
                 var legend = L.DomUtil.create('div', 'accordionlegend-legend accordionlegend-legend-hidden', layerdiv);
                 control.legendRegistry[layer.title] = legend;
 
-                var slider = L.DomUtil.create('input', 'accordionlegend-slider', legend);
-                slider.type  = 'range';
-                slider.min   = '0';
-                slider.max   = '100';
-                slider.title = 'Adjust the layer opacity';
-                slider.value = layer.layer.options.opacity ? 100 * layer.layer.options.opacity : 100;
-                L.DomEvent.addListener(slider, 'change', function() {
-                    var opacity = 0.01 * this.value;
-                    control.setOpacity(layer.title,opacity);
-                });
-
                 L.DomEvent.addListener(cbox, 'change', function () {
                     var layername = this.value;
                     var onoff     = this.checked;
                     control.toggleLayer(layername,onoff);
                 });
+
+                // an opacity slider
+                if (layer.opacityslider !== false) {
+                    var slider = L.DomUtil.create('input', 'accordionlegend-slider', legend);
+                    slider.type  = 'range';
+                    slider.min   = '0';
+                    slider.max   = '100';
+                    slider.title = 'Adjust the layer opacity';
+                    slider.value = layer.layer.options.opacity ? 100 * layer.layer.options.opacity : 100;
+                    L.DomEvent.addListener(slider, 'change', function() {
+                        var opacity = 0.01 * this.value;
+                        control.setOpacity(layer.title,opacity);
+                    });
+                }
 
                 // now construct the legend
                 // if there's only 1 legend entry and it has no 'text' then use an inline legend instead

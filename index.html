@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>L.Control.AccordionLegend</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+
+    <!-- the demo: include the L.Control.AccordionLegend CSS and JS, then create a simple L.Map -->
+    <link rel="stylesheet" href="./L.Control.AccordionLegend.css"/>
+    <script src="./L.Control.AccordionLegend.js"></script>
+
+    <script>
+    function runDemo () {
+        // the basic map and one layer for reference
+    	var map = L.map('themap').setView([38.6270, -119.1994], 6);
+
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
+        	attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
+        	maxZoom: 13
+        }).addTo(map);
+
+        // make up a list of layers & legends broken into sections,
+        // and add it to the map
+        var LAYERS_AND_LEGENDS = [
+            {  // begin section
+                'title': "Base Maps",
+                layers: [
+                    {
+                        title: "OSM Basemap",
+                        layer: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                            zIndex: 1,  // if you want layers to stack in a specific order, use zIndex as usual
+                        }),
+                        legend: [
+                            { type: 'line', color: '#e99dae', text: "Interstate Highway" },
+                            { type: 'line', color: '#f2baa8', text: "State Highway" },
+                            { type: 'line', color: '#e1c6db', text: "State Boundary" },
+                            { type: 'square', color: '#bdd3d3', text: "Water" },
+                        ],
+                    },
+                    {
+                        title: "ESRI World Street Map",
+                        layer: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+                            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
+                            zIndex: 2,  // if you want layers to stack in a specific order, use zIndex as usual
+                        }),
+                        legend: [
+                            { type: 'line', color: 'green', text: "Green lines" },
+                            { type: 'circle', color: 'blue', text: "Blue circles" },
+                            { type: 'square', color: 'orange', text: "Orange squares" },
+                        ],
+                    },
+                ],
+            },  // end of this section
+            {  // begin section
+                'title': "Label Overlays",
+                layers: [
+                    {
+                        title: "CartoDB Positron Labels",
+                        layer: L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                            subdomains: 'abcd',
+                            maxZoom: 19,
+                            zIndex: 1000,  // if you want layers to stack in a specific order, use zIndex as usual
+                        }),
+                        opacityslider: false,
+                        legend: [],
+                    },
+                ],
+            },  // end of this section
+        ];
+
+        new L.Control.AccordionLegend({
+            position: 'topright',
+            content: LAYERS_AND_LEGENDS,
+        }).addTo(map);
+    }
+    </script>
+</head>
+<body onLoad="runDemo();">
+
+
+<div id="themap" style="width: 600px; height: 400px;"></div>
+
+
+</body>
+</html>

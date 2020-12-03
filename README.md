@@ -17,8 +17,8 @@ Download the release and unpack it, or install it via package manager:
 
 Include the CSS and JS files using tags as usual:
 ```
-<script type="text/javascript" src="leaflet-control-accordionlegend/dist/L.Control.AccordionLegend.js"></script>
-<link rel="stylesheet" type="text/css" href="leaflet-control-accordionlegend/dist/L.Control.AccordionLegend.css" />
+<script type="text/javascript" src="leaflet-control-accordionlegend/L.Control.AccordionLegend.js"></script>
+<link rel="stylesheet" type="text/css" href="leaflet-control-accordionlegend/L.Control.AccordionLegend.css" />
 ```
 
 Or `require` them:
@@ -70,6 +70,7 @@ A more formal description is as follows:
 * Each Layer object is structured as follows:
     * A *title* attribute, which is the title displayed in the legend. This is used as an internal reference and therefore *must be unique* among other Layers.
     * A *layer* attribute, which is the L.TileLayer instance to be managed by this legend entry.
+    * A *opacityslider* attribute, which can be set to `false` if you do not want the layer to get an opacity slider. The default is true.
     * A *legend* attribute, this being the list of *Legend* objects to be displayed for this layer.
 * The list of Legend objects, are as follows:
     * A *type* attribute, which affects the legend swatch generated.

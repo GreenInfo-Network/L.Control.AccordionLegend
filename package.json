@@ -1,9 +1,9 @@
 {
   "name": "leaflet-control-accordionlegend",
-  "version": "1.2.1",
+  "version": "1.2.4",
   "description": "an attractive accordion legend for Leaflet",
-  "main": "dist/L.Control.AccordionLegend.js",
-  "style": "dist/L.Control.AccordionLegend.css",
+  "main": "L.Control.AccordionLegend.js",
+  "style": "L.Control.AccordionLegend.css",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
