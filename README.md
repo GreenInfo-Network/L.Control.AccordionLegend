@@ -35,7 +35,7 @@ The *content* parameter is a structure for the legend. This consists of a list o
 ```
     var LAYERS_AND_LEGENDS = [
         {
-            'title': "Base Maps",
+            title: "Base Maps",
             layers: [
                 {
                     'title': "OSM Basemap",
@@ -52,12 +52,13 @@ The *content* parameter is a structure for the legend. This consists of a list o
         },
         // add more sections, with a 'section' title and a list of layers:[]
         {
-            'title': "Second Section",
+            title: "Second Section",
             layers: [ ... add layers to this accordion section ... ]
         },
-        // if no sections is need, add 'directory': false, and a list of layers:[]
+        // to make a section with no title and expand/collapse behavior, add directory: false and skip the title
+        // this is particularly useful for legends with only one section
         {
-            'directory': false,
+            directory: false,
             layers: [
                 {
                         'title': 'Boundary',
@@ -65,7 +66,7 @@ The *content* parameter is a structure for the legend. This consists of a list o
                         'legend': [{ 'type':'square', 'color':'#bdd3d3', 'text':'' }],
                         'opacity': 0.1
                 },
-                // add more layer objects to this section
+                // ... more layers
             ],
         },
     ];
@@ -80,11 +81,12 @@ A more formal description is as follows:
 * Each Section consists of the following:
     * A *title* attribute, this being the title of the section. This is used as an internal reference and therefore *must be unique* among Sections.
     * A *layers* attribute, this being a list of Layer objects.
-    * A *directory* attribute, this being an optional boolean value to control whether there is a section or not.
+    * A *directory* attribute, this being a boolean value. If false (the only meaningful value) then the section will not have a title nor expand/collapse behavior. This is particularly useful for legends with only one section.
 * Each Layer object is structured as follows:
     * A *title* attribute, which is the title displayed in the legend. This is used as an internal reference and therefore *must be unique* among other Layers.
     * A *layer* attribute, which is the L.TileLayer instance to be managed by this legend entry.
-    * A *opacityslider* attribute, which can be set to `false` if you do not want the layer to get an opacity slider. The default is true.
+    * An *opacityslider* attribute, which can be set to `false` if you do not want the layer to get an opacity slider. The default is true.
+    * An *opacity* attribute, which sets the initial opacity. _It is recommended to use this instead of setting the opacity option in the L.tileLayer, as this will also work for vector layers e.g. Path, Polygon, etc._
     * A *legend* attribute, this being the list of *Legend* objects to be displayed for this layer.
 * The list of Legend objects, are as follows:
     * A *type* attribute, which affects the legend swatch generated.
