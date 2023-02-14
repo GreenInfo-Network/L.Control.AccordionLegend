@@ -59,17 +59,21 @@ L.Control.AccordionLegend = L.Control.extend({
             // the title and toggle behavior, which itself is more complicated than it should be cuz of the toggling triangles
             // the 'sectitle' title bars get logged into titlebarRegistry
             // this is a mapping of name => [titlebar,div] and is used to random-access so one can toggle a section by name
-            var sectitle = L.DomUtil.create('h2', 'accordionlegend-section-title', panel);
-            var triangle = L.DomUtil.create('i', '+', sectitle);
-            var title    = L.DomUtil.create('span', '', sectitle);
-            title.innerHTML = section.title;
+            if (section.directory !== false) {
+                var sectitle = L.DomUtil.create('h2', 'accordionlegend-section-title', panel);
+                var triangle = L.DomUtil.create('i', '+', sectitle);
+                var title    = L.DomUtil.create('span', '', sectitle);
+                title.innerHTML = section.title;
+    
+                var secdiv = L.DomUtil.create('div', 'accordionlegend-section accordionlegend-section-hidden', panel);
 
-            var secdiv = L.DomUtil.create('div', 'accordionlegend-section accordionlegend-section-hidden', panel);
-
-            control.titlebarRegistry[section.title] = [ sectitle, secdiv, triangle ];
-            L.DomEvent.addListener(sectitle, 'click', function () {
-                control.toggleSection(section.title);
-            });
+                control.titlebarRegistry[section.title] = [ sectitle, secdiv, triangle ];
+                L.DomEvent.addListener(sectitle, 'click', function () {
+                    control.toggleSection(section.title);
+                });
+            } else {
+                var secdiv = L.DomUtil.create('h2', 'accordionlegend-section-title', panel);
+            }
 
             // part 2
             // the 'secdiv' content of the layer-legends and layer-checkboxes
@@ -134,7 +138,7 @@ L.Control.AccordionLegend = L.Control.extend({
                     slider.min   = '0';
                     slider.max   = '100';
                     slider.title = 'Adjust the layer opacity';
-                    slider.value = layer.layer.options.opacity ? 100 * layer.layer.options.opacity : 100;
+                    slider.value = layer.opacity ? 100 * layer.opacity : 100;
                     L.DomEvent.addListener(slider, 'change', function() {
                         var opacity = 0.01 * this.value;
                         control.setOpacity(layer.title,opacity);
@@ -240,9 +244,14 @@ L.Control.AccordionLegend = L.Control.extend({
         });
         return layerStates;
     },
-    setOpacity: function (layername,opacity) {
+    setOpacity: function (layername, opacity) {
         var layer = this.layerRegistry[layername];
-        layer.setOpacity(opacity);
+        if (typeof layer.setOpacity !== "undefined") { 
+            layer.setOpacity(opacity);
+        } else {
+            // 'opacity': opacity, 
+            layer.setStyle({'fillOpacity': opacity});
+        }
 
         // return myself cuz method chaining is awesome
         return this;

@@ -61,10 +61,9 @@
     white-space:nowrap;
 }
 
-.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend {
+.leaflet-control-accordionlegend-panel div.accordionlegend-layer div.accordionlegend-legend {
     margin-left:1.5em;
     font-weight:normal;
-    margin-bottom:1em;
 }
 
 .leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend div.accordionlegend-slider {
@@ -88,11 +87,11 @@
     vertical-align:text-top;
 }
 
-.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer label > div.accordionlegend-swatch {
+.leaflet-control-accordionlegend-panel div.accordionlegend-layer label > div.accordionlegend-swatch {
     margin-left:0.5em;
 }
 
-.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer label > img.accordionlegend-swatch {
+.leaflet-control-accordionlegend-panel div.accordionlegend-layer label > img.accordionlegend-swatch {
     margin-left:0.5em;
 }
 
@@ -109,7 +108,6 @@
     display: inline-block;
     margin-left: 0.5em;
 }
-
 
 .leaflet-control-accordionlegend-panel .noUi-horizontal {
     height: 8px;

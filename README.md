@@ -55,6 +55,19 @@ The *content* parameter is a structure for the legend. This consists of a list o
             'title': "Second Section",
             layers: [ ... add layers to this accordion section ... ]
         },
+        // if no sections is need, add 'directory': false, and a list of layers:[]
+        {
+            'directory': false,
+            layers: [
+                {
+                        'title': 'Boundary',
+                        'layer': vectorLayer,
+                        'legend': [{ 'type':'square', 'color':'#bdd3d3', 'text':'' }],
+                        'opacity': 0.1
+                },
+                // add more layer objects to this section
+            ],
+        },
     ];
 
     new L.Control.AccordionLegend({
@@ -67,6 +80,7 @@ A more formal description is as follows:
 * Each Section consists of the following:
     * A *title* attribute, this being the title of the section. This is used as an internal reference and therefore *must be unique* among Sections.
     * A *layers* attribute, this being a list of Layer objects.
+    * A *directory* attribute, this being an optional boolean value to control whether there is a section or not.
 * Each Layer object is structured as follows:
     * A *title* attribute, which is the title displayed in the legend. This is used as an internal reference and therefore *must be unique* among other Layers.
     * A *layer* attribute, which is the L.TileLayer instance to be managed by this legend entry.
