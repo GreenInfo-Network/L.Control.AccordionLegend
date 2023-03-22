@@ -73,15 +73,10 @@
 .leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-legend div.accordionlegend-classification {
 }
 
-.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-swatch {
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer div.accordionlegend-swatch, 
+.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer img.accordionlegend-swatch, 
+.leaflet-control-accordionlegend-panel div.accordionlegend-layer div.accordionlegend-swatch {
     display:inline-block;
-    width:1em;
-    height:1em;
-    vertical-align:text-top;
-}
-
-.leaflet-control-accordionlegend-panel div.accordionlegend-section div.accordionlegend-layer img.accordionlegend-swatch {
-    display:inline;
     width:1em;
     height:1em;
     vertical-align:text-top;
